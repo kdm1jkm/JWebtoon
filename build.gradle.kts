@@ -16,7 +16,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.jsoup/jsoup
     implementation("org.jsoup:jsoup:1.14.2")
-
 }
 
 tasks.withType<KotlinCompile>() {
