@@ -30,9 +30,6 @@ abstract class AbstractWebtoonTask {
     var threadCount = DEFAULT_THREAD_COUNT
     var onEachTaskFinished: DownloadImageFinishHandler? = null
 
-    val imageCount
-        get() = imageQueue.size
-
     abstract override fun toString(): String
 
     fun run() {

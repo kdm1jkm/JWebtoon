@@ -14,12 +14,10 @@ class NaverWebtoonTask(private val id: Int, private val no: Int, private val par
         ConcurrentLinkedQueue(getWebtoonImageSource(Jsoup.connect(url.toString()).get()))
     }
 
-
     private fun getWebtoonImageSource(doc: Document): List<URL> =
         doc.select("img[alt='comic content']").stream().map {
             URL(it.attr("src"))
         }.toList()
-
 
     override fun toString(): String = "${parent.webtoonName}($id)/%04d".format(no)
 }
