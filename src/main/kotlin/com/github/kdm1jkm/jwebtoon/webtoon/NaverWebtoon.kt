@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document
 import java.net.URL
 import java.net.URLEncoder
 import java.util.regex.Pattern
-import java.util.stream.Stream
+import kotlin.streams.toList
 
 
 class NaverWebtoon private constructor(
@@ -39,8 +39,8 @@ class NaverWebtoon private constructor(
             toIntOrNull()
         } ?: return null
 
-        val result  = ArrayList<NaverWebtoonTask>()
-        for (i in 1..lastEp){
+        val result = ArrayList<NaverWebtoonTask>()
+        for (i in 1..lastEp) {
             result.add(NaverWebtoonTask(id, i, this@NaverWebtoon))
         }
         return result
@@ -50,7 +50,7 @@ class NaverWebtoon private constructor(
     override fun getTaskByNo(no: Int): AbstractWebtoonTask = NaverWebtoonTask(id, no, this)
 
     companion object {
-        fun load(webtoonName: String): NaverWebtoon? = URLEncoder.encode(webtoonName, Charsets.UTF_8).let {
+        fun load(webtoonName: String): NaverWebtoon? = URLEncoder.encode(webtoonName, "utf-8").let {
             Jsoup.connect("https://comic.naver.com/search.nhn?m=webtoon&keyword=$it").get()
         }.run {
             selectFirst("#content > div:nth-child(2) > ul > li > h5 > a")
@@ -93,7 +93,7 @@ class NaverWebtoon private constructor(
         }
 
         fun search(keyWord: String): List<Pair<String, Int>>? {
-            val encodedName = URLEncoder.encode(keyWord, Charsets.UTF_8)
+            val encodedName = URLEncoder.encode(keyWord, "utf-8")
             val searchUrl = "https://comic.naver.com/search.nhn?m=webtoon&keyword=$encodedName"
             val searchDoc = Jsoup.connect(searchUrl).get()
 

@@ -5,6 +5,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.net.URL
 import java.util.concurrent.ConcurrentLinkedQueue
+import kotlin.streams.toList
 
 class NaverWebtoonTask(private val id: Int, private val no: Int, private val parent: NaverWebtoon) :
     AbstractWebtoonTask() {
