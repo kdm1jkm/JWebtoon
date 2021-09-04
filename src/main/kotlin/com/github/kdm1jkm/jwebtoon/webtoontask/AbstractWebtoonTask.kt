@@ -4,12 +4,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
+import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse
 import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -56,17 +54,8 @@ abstract class AbstractWebtoonTask {
                         val connection = address.openConnection()
                         connection.setRequestProperty("User-agent", USER_AGENT)
 
+                        val data = BufferedInputStream(connection.getInputStream()).readBytes()
                         val fout = FileOutputStream(file)
-                        val client = HttpClient
-                            .newBuilder()
-                            .build()
-
-                        val data = client.send(
-                            HttpRequest.newBuilder(
-                                address.toURI()
-                            ).GET().header("User-agent", USER_AGENT).build(),
-                            HttpResponse.BodyHandlers.ofByteArray()
-                        ).body()
 
                         fout.write(data)
                         fout.close()
