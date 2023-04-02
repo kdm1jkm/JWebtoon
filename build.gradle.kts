@@ -10,12 +10,15 @@ repositories {
     mavenCentral()
 }
 
-
-
 kotlin {
     jvmToolchain(8)
 }
 
 application {
     mainClass.set("MainKt")
+}
+
+dependencies {
+    // jsoup HTML parser library @ https://jsoup.org/
+    implementation("org.jsoup:jsoup:1.15.4")
 }
