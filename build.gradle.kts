@@ -21,4 +21,7 @@ application {
 dependencies {
     // jsoup HTML parser library @ https://jsoup.org/
     implementation("org.jsoup:jsoup:1.15.4")
+
+    // https://mvnrepository.com/artifact/com.microsoft.playwright/playwright
+    implementation("com.microsoft.playwright:playwright:1.32.0")
 }
