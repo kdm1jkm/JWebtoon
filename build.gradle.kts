@@ -1,34 +1,21 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm") version "1.5.10"
-    `maven-publish`
+    kotlin("jvm") version "1.8.0"
+    application
 }
 
 group = "com.github.kdm1jkm"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt")
 
-    // https://mvnrepository.com/artifact/org.jsoup/jsoup
-    implementation("org.jsoup:jsoup:1.14.2")
+
+kotlin {
+    jvmToolchain(8)
 }
 
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "16"
-}
-
-publishing{
-    publications{
-        create<MavenPublication>("lib"){
-            groupId = "com.github.kdm1jkm"
-            artifactId = "JWebtoon"
-            version = "0.0.1"
-            from(components["java"])
-        }
-    }
+application {
+    mainClass.set("MainKt")
 }
